@@ -1,0 +1,39 @@
+\documentclass{article}
+
+\usepackage{listings}
+
+\begin{document}
+ 
+
+
+
+\title{EPICS For MCB4B}
+\date{}
+\author{Caleb Marshall}
+\maketitle
+
+  These instructions already assume that you have installed the EPICS base(version 15), extensions, and synApps. If you have not please refer to
+the other documentation for these steps. It should also be noted that we need the IP package in synApps, so if you have it commented out, uncomment it and 
+rebuild the package. In theory installing synApps should give us a perfectly working motor record from which we could build all of our systems. However, 
+there are several oddities that crop up in order to get the MCB4B record to work. 
+
+
+ 
+\begin{itemize}
+  \item Enter the synApps/support/motor-6-9 directory
+  \item In the make file uncomment the lines for building examples
+  \item In the release file in the configure directory make sure IPAC, ASYN, and MOTOR variables are defined
+  \item In the makefile in the motorApp directory comment out all unwanted driver, in this case we only want the AcsSrc one
+  \item Moving to the the dbd directory in the PI\_GCS2Support.dbd file comment out the two include statements
+  \item In the motorExApp/WithAsyn directory replace the make file with the corrected one found along with this documentation.
+  \item Finally in the iocWithAsyn directory within iocBoot open the makefile and add \_64 to the architecture definition, and rerun make 
+\end{itemize}  
+  
+
+This should be everything that you need to start making a MCB4B control system.
+ 
+ 
+
+ 
+ 
+\end{document}
